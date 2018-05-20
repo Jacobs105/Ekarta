@@ -10,16 +10,5 @@ import javax.validation.Valid;
 
 @RestController
 public class MainRestController {
-    @Autowired
-    private UsersService usersService;
 
-    @ResponseBody
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public ModelAndView register(@ModelAttribute("userRegister")@Valid User user){
-        ModelAndView mv = new ModelAndView("registerSuccess");
-        usersService.registerNewUser(user);
-        System.out.println("ZAPISANE");
-
-        return mv;
-    }
 }

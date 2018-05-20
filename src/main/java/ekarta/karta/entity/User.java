@@ -1,24 +1,23 @@
 package ekarta.karta.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.validator.constraints.pl.PESEL;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-import java.sql.Date;
 
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "doctors")
+@Table(name = "doctors",schema = "ekarta")//Rozwiązanie problemu relacji
 public class User implements Serializable {//TODO Brak relacji z users
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq")
+   @SequenceGenerator(name = "user_seq" ,schema = "ekarta",sequenceName = "doctor_id_seq",
+           initialValue = 1,allocationSize = 1)
     @Column(name="user_id")
     private long id;
     @Column(name = "user_email")
@@ -31,8 +30,10 @@ public class User implements Serializable {//TODO Brak relacji z users
     private String lastName;
     @Column(name = "user_speciality")
     private String speciality;
-    @Column(name = "role_id")//FK
-    private long role;
+    @ManyToOne
+    @JoinColumn(name = "role_id",nullable = false)
+    private Role role;
+
 //    private Date birthDay;
 //    @Pattern(regexp = "[0-9]{11}")
 //    private String pesel;
