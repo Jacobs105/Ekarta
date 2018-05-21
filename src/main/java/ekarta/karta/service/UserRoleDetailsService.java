@@ -2,7 +2,6 @@ package ekarta.karta.service;
 
 import ekarta.karta.entity.User;
 import ekarta.karta.service.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,19 +17,27 @@ import java.util.Optional;
 @Service
 public class UserRoleDetailsService implements UserDetailsService {
 
-    @Autowired
+
     private UserRepository userRepository;
 
+    public UserRoleDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+   public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Optional<User> user = userRepository.findUserByEmailContainingIgnoreCase(email);
 
-        if(!user.isPresent()){
-            throw new UsernameNotFoundException("User"+ email + "not found.");
+
+
+        if(!user.isPresent()){ //Nie znajduje Usera
+            throw new UsernameNotFoundException("User "+ email +  "not found.");
         }
         List<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_"+user.get().getRole().getRoleName()));
-        return new org.springframework.security.core.userdetails.User(user.get().getEmail(),user.get().getPassword(),authorities);
+        return new org.springframework.security.core.userdetails.User(user.get().getEmail(),
+                user.get().getPassword(),authorities);
     }
+
 }

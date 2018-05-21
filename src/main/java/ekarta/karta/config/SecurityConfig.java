@@ -1,7 +1,6 @@
 package ekarta.karta.config;
 
 import ekarta.karta.service.UserRoleDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,8 +12,13 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Autowired
+
+
     private UserRoleDetailsService userRoleDetailsService;
+
+    public SecurityConfig(UserRoleDetailsService userRoleDetailsService){
+        this.userRoleDetailsService = userRoleDetailsService;
+    }
 
 
     @Override
@@ -28,12 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
        http
                .authorizeRequests()
                .antMatchers("/usersList").hasAnyRole("ADMIN")
+               .antMatchers("/test").hasAnyRole("USER")
                .antMatchers("/login/**").anonymous()
                .antMatchers("/register").anonymous()
                .and()
                .formLogin()
-               .usernameParameter("user_email")
-               .passwordParameter("user_pwd")
+               .usernameParameter("email")
+               .passwordParameter("password")
                .loginPage("/login")
                .failureUrl("/login-error")
                .defaultSuccessUrl("/")

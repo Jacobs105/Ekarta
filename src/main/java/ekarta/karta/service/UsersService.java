@@ -39,6 +39,7 @@ public class UsersService {
 
     public boolean isEmailTaken(String email) {
         Optional<User> user = userRepository.findUserByEmailContainingIgnoreCase(email);
+        System.out.println("Mail jest zajęty");
 
         return user.isPresent();
     }
