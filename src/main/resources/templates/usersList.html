@@ -15,6 +15,7 @@
             <th scope="col">Last</th>
             <th scope="col">Email</th>
             <th scope="col">Speciality</th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody th:each="item:${userList}">
@@ -24,6 +25,7 @@
             <td th:text="${item.lastName}">Jacob</td>
             <td th:text="${item.email}">Larry</td>
             <td th:text="${item.speciality}">Uć</td>
+           <td> <a th:object="${item}" th:method="delete"  class="btn btn-danger">Delete</a></td>
 
         </tr>
 

@@ -43,4 +43,8 @@ public class UsersService {
 
         return user.isPresent();
     }
+
+    public void deleteUser(String email){
+        userRepository.deleteUserByEmail(email);
+    }
 }
