@@ -1,9 +1,14 @@
 package ekarta.karta.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestMethod;
+@Controller
 public class LocaleController {
 
-    @RequestMapping
+    @RequestMapping(value = "/locale",method = RequestMethod.GET)
+    public String getLocalePage(){
+        return "locale";
+    }
 
 }
