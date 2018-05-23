@@ -19,8 +19,8 @@ import java.util.Set;
 @Table(name = "patient", schema = "ekarta")
 public class Patient  implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "patient_seq")
-    @SequenceGenerator(name = "patient_sqe",schema = "ekarta", sequenceName = "patient_id_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pat_seq")
+    @SequenceGenerator(name = "pat_seq",schema = "ekarta", sequenceName = "patient_id_seq")
     @Column(name = "patient_id")
     private int id;
 

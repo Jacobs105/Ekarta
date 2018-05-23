@@ -27,10 +27,8 @@ public class UserController {
         ModelAndView mv = new ModelAndView("myPatients");
         Optional<User> user = usersService.findUserByEmail(principal.getName());
         if(user.isPresent()){
-            mv.addObject("patientList",user.getPatients());
+            mv.addObject("patientList",user.get().getPatients());
         }
-
-
         return mv;
     }
 
