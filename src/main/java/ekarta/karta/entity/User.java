@@ -4,6 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -33,6 +37,12 @@ public class User implements Serializable {//TODO Brak relacji z users
     @ManyToOne
     @JoinColumn(name = "role_id",nullable = false)
     private Role role;
+
+    @ManyToMany(cascade = {CascadeType.ALL} )
+    @JoinTable(name = "doctors_patient",
+                joinColumns ={@JoinColumn(name = "users_id")},
+                inverseJoinColumns = {@JoinColumn(name = "patient_id")})
+    List<Patient> patients = new ArrayList<>();
 
 //    private Date birthDay;
 //    @Pattern(regexp = "[0-9]{11}")

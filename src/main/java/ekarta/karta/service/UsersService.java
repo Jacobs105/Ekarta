@@ -43,6 +43,7 @@ public class UsersService {
 
         return user.isPresent();
     }
+    public Optional<User> findUserByEmail(String email){ return userRepository.findUserByEmailContainingIgnoreCase(email);}
 
     public void deleteUser(String email){
         userRepository.deleteByEmail(email);

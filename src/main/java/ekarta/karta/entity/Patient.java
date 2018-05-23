@@ -5,6 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -40,6 +44,7 @@ public class Patient  implements Serializable {
     @Pattern(regexp ="[0-9]{2}(|-)?[0-9]{3}")
     private String zip_code;
 
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "")
+    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "patients")
+    private List<User> users = new ArrayList<>();
 
 }
