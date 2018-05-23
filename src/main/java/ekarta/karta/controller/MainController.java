@@ -25,13 +25,7 @@ public class MainController {
         return mv;
     }
 
-    @RequestMapping(value = "/usersList",method = RequestMethod.GET)
-    public ModelAndView showList(){
-        ModelAndView mv = new ModelAndView("usersList");
-        List<User> usersList = userService.findAll();
-        mv.addObject("userList",usersList);
-        return mv;
-    }
+
 
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public ModelAndView test(){
