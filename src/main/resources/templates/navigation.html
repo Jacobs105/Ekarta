@@ -1,21 +1,64 @@
 <div role="navigation" th:fragment="navigation" xmlns:th="http://www.w3.org/1999/xhtml">
+    <style>
+        /* Style The Dropdown Button */
+        .dropbtn {
+            background-color: #000000;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: #000000;
+        }
+    </style>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto font-weight-normal">E-Karta</h5>
         <nav class="my-2 my-md-0 mr-md-3">
             <a class="p-2 text-dark" href="/">Strona domowa</a>
             <a class="p-2 text-dark" href="/admin/usersList">Lista</a>
             <a class="p-2 text-dark" href="/test">test</a>
-            <div class="p-2 dropdown show">
-                <a class="btn btn-secondary dropdown-toggle" href="#"
-                   role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    User menu
-                </a>
-
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="/test">Test</a>
-                    <a class="dropdown-item" href="/user/my-patientList">My Patients</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown">
+                <button class="dropbtn">Dropdown</button>
+                <div class="dropdown-content">
+                    <a href="/user/my-patientList">My patients</a>
+                    <a href="/user/addPatient">Add patient</a>
+                    <a href="/test">test</a>
                 </div>
             </div>
         </nav>

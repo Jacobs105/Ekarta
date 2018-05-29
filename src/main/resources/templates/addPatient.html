@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: head">
+
+</head>
+<body>
+<div class=" container">
+    <form id="addPatient" th:action="@{/user/addPatient}" th:object="${patientInfo}"
+          method="post" enctype="utf-8" role="form">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="first_name">First Name</label>
+            <input th:field="*{firstName}" th:type="text" class="form-control" id="first_name"
+            placeholder="First Name">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="last_name">Last Name</label>
+            <input th:field="*{lastName}" th:type="text" class="form-control" id="last_name"
+            placeholder="Last Name">
+        </div>
+      </div>
+      <div class="form-row">
+          <div class="form-group col-md-6">
+              <label for="email">Email</label>
+              <input th:field="*{email}" th:type="email" class="form-control" id="email"
+              placeholder="Email">
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="address">Address</label>
+                  <input th:field="*{address}" th:type="text" class="form-control" id="address">
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="pesel">PESEL</label>
+                  <input th:field="*{pesel}" th:type="number"  class="form-control" id="pesel">
+              </div>
+              <div class="form-group col-md-2">
+                  <label for="inputZip">Zip</label>
+                  <input th:field="*{zip_code}" type="text" class="form-control" id="inputZip">
+              </div>
+          </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Add patient</button>
+    </form>
+</div>
+
+</body>
+</html>

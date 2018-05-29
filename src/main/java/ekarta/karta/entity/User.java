@@ -5,9 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -18,7 +16,7 @@ import java.util.Set;
 @Table(name = "doctors",schema = "ekarta")//Rozwiązanie problemu relacji
 public class User implements Serializable {//TODO Brak relacji z users
 
-    @Id
+   @Id
    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "user_seq")
    @SequenceGenerator(name = "user_seq" ,schema = "ekarta",sequenceName = "doctor_id_seq",
            initialValue = 1,allocationSize = 1)
@@ -38,11 +36,8 @@ public class User implements Serializable {//TODO Brak relacji z users
     @JoinColumn(name = "role_id",nullable = false)
     private Role role;
 
-    @ManyToMany(cascade = {CascadeType.ALL} )
-    @JoinTable(name = "doctors_patient",
-                joinColumns ={@JoinColumn(name = "users_id")},
-                inverseJoinColumns = {@JoinColumn(name = "patient_id")})
-    List<Patient> patients = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private List<Patient> patients;
 
 //    private Date birthDay;
 //    @Pattern(regexp = "[0-9]{11}")

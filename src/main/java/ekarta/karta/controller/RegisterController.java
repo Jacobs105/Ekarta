@@ -43,7 +43,8 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public ModelAndView register(@ModelAttribute("userRegister")@Valid User user, BindingResult result,Locale locale){
+    public ModelAndView register(@ModelAttribute("userRegister")@Valid User user,
+                                 BindingResult result,Locale locale){
         ModelAndView mv = new ModelAndView("register");
 
         if(result.hasErrors()){
@@ -51,7 +52,7 @@ public class RegisterController {
             return mv;
         }
         if (usersService.isEmailTaken(user.getEmail())){
-            FieldError emailTakenError = new FieldError("userRefister",
+            FieldError emailTakenError = new FieldError("userRegister",
                     "email",messageSource.getMessage("email.taken",null,locale));
             result.addError(emailTakenError);
             mv.addObject("failure","failure");
@@ -59,8 +60,7 @@ public class RegisterController {
         }
 
         usersService.registerNewUser(user);
-        mv.addObject("success",messageSource.getMessage("register.success",
-                null,locale));
+        mv.addObject("success","success");
         System.out.println("ZAPISANE");
 
         return mv;

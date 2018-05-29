@@ -6,9 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -22,7 +20,7 @@ public class Patient  implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pat_seq")
     @SequenceGenerator(name = "pat_seq",schema = "ekarta", sequenceName = "patient_id_seq")
     @Column(name = "patient_id")
-    private int id;
+    private long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -40,11 +38,14 @@ public class Patient  implements Serializable {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "zpicode")
+    @Column(name = "zipcode")
     @Pattern(regexp ="[0-9]{2}(|-)?[0-9]{3}")
     private String zip_code;
 
-    @ManyToMany(fetch = FetchType.LAZY,mappedBy = "patients")
-    private List<User> users = new ArrayList<>();
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
 
 }
