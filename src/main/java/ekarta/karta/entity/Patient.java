@@ -20,7 +20,7 @@ public class Patient  implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pat_seq")
     @SequenceGenerator(name = "pat_seq",schema = "ekarta", sequenceName = "patient_id_seq")
     @Column(name = "patient_id")
-    private long id;
+    private int id;
 
     @Column(name = "first_name")
     private String firstName;

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,6 +63,7 @@ public class UserController {
 
             patientService.registerNewPatient(patient);
             mv.addObject("success","success");
+            mv.setViewName("redirect:/user/my-patientList");
         }else {
             mv.addObject("failure","failure");
 
@@ -69,6 +71,14 @@ public class UserController {
         return mv;
 
     }
+    @RequestMapping(value = "/patientDelete/{id}",method = RequestMethod.GET)
+    public String deletePatient(@PathVariable int id){
+
+        patientService.deletePatient(id);
+
+        return "redirect:/user/my-patientList";
+    }
+
 
 
 

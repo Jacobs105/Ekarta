@@ -1,12 +1,14 @@
-<div role="navigation" th:fragment="navigation" xmlns:th="http://www.w3.org/1999/xhtml">
+<div role="navigation" th:fragment="navigation" xmlns:th="http://www.thymeleaf.org"
+                                                xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <style>
         /* Style The Dropdown Button */
         .dropbtn {
-            background-color: #000000;
+            background-color: #2a8aec;
             color: white;
             padding: 16px;
             font-size: 16px;
             border: none;
+            border-radius: 12px;
             cursor: pointer;
         }
 
@@ -53,17 +55,21 @@
             <a class="p-2 text-dark" href="/">Strona domowa</a>
             <a class="p-2 text-dark" href="/admin/usersList">Lista</a>
             <a class="p-2 text-dark" href="/test">test</a>
+        </nav>
+        <div sec:authorize="isAuthenticated()" >
             <div class="dropdown">
-                <button class="dropbtn">Dropdown</button>
+                <button class="dropbtn" sec:authentication="name" ></button>
                 <div class="dropdown-content">
                     <a href="/user/my-patientList">My patients</a>
                     <a href="/user/addPatient">Add patient</a>
-                    <a href="/test">test</a>
+                    <a href="/logout" >Logout</a>
                 </div>
             </div>
-        </nav>
+        </div>
+        <div sec:authorize="isAnonymous()">
         <a class="btn btn-outline-primary" href="/login">Login</a>
         <a class="btn btn-outline-secondary" href="/register">Sign in</a>
+        </div>
     </div>
 
 </div>

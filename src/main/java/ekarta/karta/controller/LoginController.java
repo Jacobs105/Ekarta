@@ -17,11 +17,11 @@ public class LoginController {
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login(Model model, String error, String logout, Locale locale){
         if(error != null){
-            model.addAttribute("error",messageSource.getMessage("login.incorect",null,locale));
+            model.addAttribute("error","error");
         }
 
         if(logout != null){
-            model.addAttribute("logout",messageSource.getMessage("logout.success",null,locale));
+            model.addAttribute("logout","logout");
         }
 
 
@@ -29,9 +29,9 @@ public class LoginController {
     }
 
 
-//    @RequestMapping(value = "/login-error")
-//    public String loginerror(Model model){
-//        model.addAttribute("loginError",true);
-//        return "login";
-//    }
+    @RequestMapping(value = "/login-error")
+    public String loginerror(Model model){
+        model.addAttribute("loginError",true);
+        return "login";
+    }
 }
